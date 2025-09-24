@@ -1,0 +1,79 @@
+main {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+}
+
+/* Objetivo */
+.sobre-objetivo {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.sobre-objetivo h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.sobre-objetivo p {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* Título da equipe */
+.integrantes h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #222;
+}
+
+/* Grid dos cards */
+.grid-integrantes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* sempre 3 colunas */
+    gap: 25px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+
+/* Estilo de cada card */
+.card-integrante {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.card-integrante:hover {
+    transform: translateY(-5px);
+}
+
+.card-integrante img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.card-integrante h3 {
+    margin: 10px 0;
+    font-size: 1.3rem;
+    color: #333;
+}
+
+.card-integrante p {
+    font-size: 0.95rem;
+    padding: 0 20px;
+    text-align: justify;
+    color: #666;
+    line-height: 1.8;
+}

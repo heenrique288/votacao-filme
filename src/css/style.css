@@ -1,0 +1,127 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* 3 colunas: esquerda - centro - direita */
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  padding: 20px 100px;
+}
+
+/* Logo alinhada à esquerda */
+.logo {
+  justify-self: start;
+}
+
+/* Menu centralizado */
+header > ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+  justify-self: center; /* centraliza na grid */
+}
+
+/* Hover do menu */
+header > ul li a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  line-height: 1;
+  transition: color 0.3s;
+}
+
+header > ul li a:hover {
+  color: #0084ff;
+}
+
+/* Ícone de perfil alinhado à direita */
+.perfil {
+  position: relative;
+  justify-self: end;
+  margin-right: 20px;
+  width: 40px;  /* largura igual ao ícone */
+  height: 40px; /* altura igual ao ícone */
+}
+
+.perfil i {
+  border: 2px solid black;
+  border-radius: 50%;
+  font-size: 40px;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.perfil i:hover {
+  color: #00bcd4;
+}
+
+
+/*DROPDOWN*/
+
+.dropdown {
+  display: none; /* escondido por padrão */
+  position: absolute;
+  top: 10px; /* distância abaixo do ícone */
+  right: 0;
+  background-color: #444;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  min-width: 150px;
+  z-index: 100;
+}
+
+.dropdown a {
+  display: block;
+  padding: 10px 15px;
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.dropdown a:hover {
+  background-color: #555;
+}
+
+/*FIM DO DROPDOWN*/
+
+
+.search-form {
+  display: flex;
+  gap: 5px;
+}
+
+.search-form input {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+}
+
+.search-form button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #ff6600;
+  color: #fff;
+}
+
+/*FOTO DE PERFIL DO HEADER*/
+
+.perfil .user-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
