@@ -159,3 +159,51 @@
     opacity: 1;
     transform: translateY(0);
 }
+
+/*CARD DOS FILMES E DOS VOTOS*/
+
+.card-filme-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px; /* espaço entre os cards */
+}
+
+.card-footer {
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 0 0 8px 8px;
+}
+
+/*CARD MOSTRAR VOTOS*/
+
+.votos-card {
+    max-width: 800px;   /* deixa o card mais estreito */
+    margin: 0 auto;     /* centraliza */
+    background-color: #1c1c1c; /* mantém escuro */
+    color: #fff;        /* texto branco */
+    border-radius: 8px;
+    padding: 15px;
+}
+
+/* Título do filme */
+.votos-card h5 {
+    color: yellow; /* ou #FFD700 se quiser um dourado */
+    font-weight: bold;
+    text-align: center; /* opcional, caso queira centralizar o título */
+    margin-bottom: 30px !important;
+}
+
+/* Centraliza o bloco de cada linha */
+.votos-card .d-flex {
+    justify-content: center;   /* centraliza o conjunto todo no card */
+    gap: 10px;                 /* espaço entre foto e nome */
+    margin-left: 70px;             /* remover qualquer margin-left */
+}
+
+/* Nome do usuário */
+.votos-card span {
+    display: inline-block;
+    width: 200px;              /* define largura fixa */
+    text-align: left;          /* nomes começam alinhados à esquerda */
+}
+
