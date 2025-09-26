@@ -73,3 +73,86 @@ button {
     opacity: 1;
     transform: translateY(0);
 }
+
+/*FORMULÁRIO DE ALTERAR OS DADOS DO USUÁRIO TIRANDO A FOTO*/
+
+.form-dados {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Labels */
+.form-dados label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+}
+
+/* Inputs */
+.form-dados input[type="text"],
+.form-dados input[type="email"],
+.form-dados input[type="password"] {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-dados input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+  outline: none;
+}
+
+/* Botão */
+.form-dados button {
+  width: 100%;
+  padding: 12px;
+  background: #007bff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.form-dados button:hover {
+  background: #0056b3;
+}
+
+/* INPUT DE SENHA*/
+
+.senha-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.senha-container input {
+  width: 100%;
+  padding-right: 40px; /* espaço pro ícone */
+}
+
+.toggle-senha {
+  position: absolute;
+  right: 12px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  color: #666;
+  font-size: 16px;
+}
+
+.toggle-senha:hover {
+  color: #007bff;
+}

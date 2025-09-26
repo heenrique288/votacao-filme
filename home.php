@@ -49,6 +49,32 @@ if ($usuarioId) {
         $nomeCompleto = $user['nome'] . ' ' . $user['sobrenome'];
     }
 }
+
+// --- verificar se usuário é admin ---
+$isAdmin = 0;
+if ($usuarioId) {
+    $stmtAdmin = $conn->prepare("SELECT admin FROM login WHERE id = ?");
+    $stmtAdmin->bind_param("i", $usuarioId);
+    $stmtAdmin->execute();
+    $resAdmin = $stmtAdmin->get_result();
+    if ($resAdmin->num_rows > 0) {
+        $rAdmin = $resAdmin->fetch_assoc();
+        $isAdmin = intval($rAdmin['admin']);
+    }
+}
+
+// --- buscar vencedor mais recente (se existir) ---
+$winner = null;
+$sqlWinner = "SELECT fs.*, i.titulo, i.poster_path
+              FROM filme_semana fs
+              JOIN indicacoes i ON fs.indicacao_id = i.id
+              ORDER BY fs.criado_em DESC
+              LIMIT 1";
+$resWinner = $conn->query($sqlWinner);
+if ($resWinner && $resWinner->num_rows > 0) {
+    $winner = $resWinner->fetch_assoc();
+}
+
 ?>
 
 <link rel="stylesheet" href="src/css/home.css">
@@ -67,7 +93,25 @@ if ($usuarioId) {
             o <strong>Filme da Semana</strong>! 🎬  
             Depois assistimos juntos e gravamos um podcast comentando no YouTube.
         </p>
+
+        <?php if ($winner): ?>
+            <section class="filme-vencedor container my-4">
+                <h2>🏆 Filme da Semana</h2>
+                <div class="d-flex align-items-center">
+                    <?php if (!empty($winner['poster_path'])): ?>
+                        <img src="https://image.tmdb.org/t/p/w342<?= htmlspecialchars($winner['poster_path']) ?>"
+                            alt="<?= htmlspecialchars($winner['titulo']) ?>" style="max-width:150px; margin-right:16px;">
+                    <?php endif; ?>
+                    <div>
+                        <h3><?= htmlspecialchars($winner['titulo']) ?></h3>
+                        <small>Escolhido em <?= date('d/m/Y', strtotime($winner['criado_em'])) ?></small>
+                    </div>
+                </div>
+            </section>
+        <?php endif; ?>
     </div>
+
+    
 </div>
 
 <section class="indicacoes">
@@ -147,6 +191,16 @@ if ($usuarioId) {
             <button class="btn btn-outline-primary mt-4" type="button" data-bs-toggle="collapse" data-bs-target="#todosVotos">
                 Mostrar votos
             </button>
+
+            <!-- Botão Finalizar votação -->
+            <?php if ($isAdmin): ?>
+                <form method="POST" action="finalizar_votacao.php" class="d-inline ms-2">
+                    <button type="submit" class="btn btn-danger mt-4"
+                            onclick="return confirm('Tem certeza que deseja finalizar a votação?');">
+                        Finalizar votação
+                    </button>
+                </form>
+            <?php endif; ?>
 
             <div class="collapse mt-2" id="todosVotos">
                 <div class="card card-body votos-card">

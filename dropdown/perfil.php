@@ -55,6 +55,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["foto"])) {
       }
   }
 }
+
+
+$sql = "SELECT nome, sobrenome, email, foto FROM login WHERE id = $usuario_id";
+$result = $conn->query($sql);
+$user = $result->fetch_assoc();
+
+// Atualizar dados do perfil
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['atualizar_dados'])) {
+    $nome = $conn->real_escape_string($_POST['nome']);
+    $sobrenome = $conn->real_escape_string($_POST['sobrenome']);
+    $email = $conn->real_escape_string($_POST['email']);
+    $senha = $_POST['senha'];
+
+    // Se o usuário digitou uma nova senha, criptografa
+    if (!empty($senha)) {
+        $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+        $sqlUpdate = "UPDATE login SET nome='$nome', sobrenome='$sobrenome', email='$email', senha='$senhaHash' WHERE id=$usuario_id";
+    } else {
+        $sqlUpdate = "UPDATE login SET nome='$nome', sobrenome='$sobrenome', email='$email' WHERE id=$usuario_id";
+    }
+
+    if ($conn->query($sqlUpdate)) {
+        $_SESSION['mensagem'] = "Dados atualizados com sucesso!";
+        $_SESSION['tipo'] = "success";
+    } else {
+        $_SESSION['mensagem'] = "Erro ao atualizar os dados!";
+        $_SESSION['tipo'] = "error";
+    }
+
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
+}
+
 ?>
 
 <link rel="stylesheet" href="../src/css/perfil.css">
@@ -79,6 +112,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["foto"])) {
       <br>
       <button type="submit">Salvar Foto</button>
     </form>
+
+    <hr>
+
+    <!-- Alterar Dados -->
+    <form method="POST" class="form-dados">
+      <label>Nome:</label>
+      <input type="text" name="nome" value="<?= htmlspecialchars($user['nome']) ?>" required><br>
+
+      <label>Sobrenome:</label>
+      <input type="text" name="sobrenome" value="<?= htmlspecialchars($user['sobrenome']) ?>" required><br>
+
+      <label>Email:</label>
+      <input type="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" required><br>
+
+      <label>Nova Senha (deixe em branco se não quiser alterar):</label>
+      <div class="senha-container">
+        <input type="password" name="senha" id="senha">
+        <span class="toggle-senha" onclick="toggleSenha()">
+          <i class="fa-solid fa-eye"></i>
+        </span>
+      </div>
+
+      <button type="submit" name="atualizar_dados">Salvar Alterações</button>
+    </form>
+
 </div>
 
 <script src="../src/js/perfil.js"></script>
