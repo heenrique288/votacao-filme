@@ -160,18 +160,20 @@ function spinV2() {
             spinBtn.disabled = false;
             const chosenIndex = (idx - 1) % candidates.length;
             const chosen = candidates[chosenIndex];
-            if (confirm('Confirmar vencedor: ' + chosen.titulo + ' ?')) {
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.action = 'finalizar_votacao.php';
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'choice';
-                input.value = chosen.id;
-                form.appendChild(input);
-                document.body.appendChild(form);
-                form.submit();
-            }
+            setTimeout(() => {
+                if (confirm('Confirmar vencedor: ' + chosen.titulo + ' ?')) {
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = 'finalizar_votacao.php';
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'choice';
+                    input.value = chosen.id;
+                    form.appendChild(input);
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            }, 800);
         }
     }
 

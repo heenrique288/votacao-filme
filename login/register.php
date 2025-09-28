@@ -16,10 +16,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssss", $nome, $sobrenome, $email, $senhaHash);
 
-    if ($stmt->execute()) {
+    try {
+        $stmt->execute();
         $sucesso = "Usuário registrado com sucesso! <a href='login.php'>Ir para login</a>";
-    } else {
-        $erro = "Erro: " . $stmt->error;
+    } catch (mysqli_sql_exception $e) {
+        if ($e->getCode() == 1062) {
+            $erro = "Já existe um usuário com este e-mail!";
+        } else {
+            $erro = "Erro: " . $e->getMessage();
+        }
     }
 }
 ?>
