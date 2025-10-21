@@ -34,7 +34,8 @@ require "login/auth.php";
             <div class="card-integrante">
                 <img src="src/img/FotoEdu.png" alt="Foto do integrante 3">
                 <h3>Eduardo Pereira</h3>
-                <p>Breve descrição sobre o integrante 3.</p>
+                <p>Sou membro dos membros fundadores do grupo e faço parte da criação de temas para os videos. Sou estudante de psicologia e adoro conversar com meus amigos sobre o que assistimos e jogamos juntos de uma forma mais aprofundada. O que era apenas uma conversa entre amigos, se tornou um compartilhamento de visões e opiniões diferentes</p>
+                <p><i class="fa-brands fa-instagram"></i> edu_pereira02023</p>
             </div>
 
             <div class="card-integrante">
