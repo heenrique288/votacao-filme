@@ -35,7 +35,7 @@ if ($usuario_id) {
         <li><a href="/votacao-filme/home.php">Home</a></li>
         <li><a href="/votacao-filme/sobre.php">Sobre</a></li>
         <li><a href="/votacao-filme/index.php">Indique seu filme!</a></li>
-        <li><a href="#">Tabela de filmes</a></li>
+        <li><a href="/votacao-filme/tabela/index.php">Tabela de filmes</a></li>
     </ul>
     <div class="perfil">
         <?php if (!$user_foto): ?>

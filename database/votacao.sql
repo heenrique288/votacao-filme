@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 21/10/2025 às 05:48
+-- Tempo de geração: 21/10/2025 às 07:55
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -207,15 +207,15 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `foto`, `nome`, `posicao`, `votos`) VALUES
-(1, 'src/img/FotoEdu.png', 'Eduardo Pereira', 1, 8),
-(2, 'src/img/FotoTheo.png', 'Théo Tavernard', 2, 8),
-(3, 'src/img/FotoHenrique.jpeg', 'Henrique José', 3, 5),
-(4, 'src/img/FotoJoao.png', 'João Victor', 4, 5),
-(5, 'src/img/FotoLuka.png', 'Alan Guilherme', 4, 5),
-(6, 'src/img/FotoCarlos.png', 'Carlos Henrique', 4, 4),
-(7, 'src/img/FotoPalacio.png', 'Guilherme Barros', 5, 2),
-(8, 'src/img/FotoGabriel.png', 'Gabriel Izawa', 6, 0),
-(9, 'src/img/FotoGeo.png', 'Giovana Dutra', 6, 1);
+(1, '../src/img/FotoEdu.png', 'Eduardo Pereira', 1, 8),
+(2, '../src/img/FotoTheo.png', 'Théo Tavernard', 2, 8),
+(3, '../src/img/FotoHenrique.jpeg', 'Henrique José', 3, 5),
+(4, '../src/img/FotoJoao.png', 'João Victor', 4, 5),
+(5, '../src/img/FotoLuka.png', 'Alan Guilherme', 4, 5),
+(6, '../src/img/FotoCarlos.png', 'Carlos Henrique', 4, 4),
+(7, '../src/img/FotoPalacio.png', 'Guilherme Barros', 5, 2),
+(8, '../src/img/FotoGabriel.png', 'Gabriel Izawa', 6, 0),
+(9, '../src/img/FotoGeo.png', 'Giovana Dutra', 6, 1);
 
 -- --------------------------------------------------------
 
