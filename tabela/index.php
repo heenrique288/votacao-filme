@@ -1,6 +1,6 @@
 <?php 
 include("../conexao.php");
-include("../global/header.php");
+
 
 
 $sqlUsuarios = "SELECT * FROM usuarios ORDER BY votos DESC";
@@ -34,8 +34,9 @@ $nomes = [
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../src/js/tabela.js"></script>
 </head>
-<body>
 
+<?php include("../global/header.php"); ?>
+<main>
     <div class="centralizar">
         <section class="search-section py-5 bg-tabela">
             <div class="container text-center">
@@ -46,7 +47,7 @@ $nomes = [
                 </h1>
             </div>
         </section>
-
+    
         <table>
             <thead>
                 <tr>
@@ -59,7 +60,7 @@ $nomes = [
             </thead>
             <tbody>
                 <?php while ($usuario = $resultUsuarios->fetch_assoc()): ?>
-
+    
                     <?php
                         if ($votosAnterior === null) {
                             $usuario['posicao_dinamica'] = $posicao;
@@ -69,11 +70,11 @@ $nomes = [
                             $posicao++;
                             $usuario['posicao_dinamica'] = $posicao;
                         }
-
+    
                         $votosAnterior = $usuario['votos'];
                         $nome = isset($nomes[$usuario['id']]) ? $nomes[$usuario['id']] : "";
                     ?>
-
+    
                     <tr>
                         <td>
                             <div class="foto">
@@ -101,10 +102,11 @@ $nomes = [
                             </a>
                         </td>
                     </tr>
-
+    
                 <?php endwhile; ?>
             </tbody>
         </table>
     </div>
-</body>
-</html>
+</main>
+
+<?php include("../global/footer.php"); ?>

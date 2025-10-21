@@ -87,6 +87,7 @@ table {
 }
 
 thead {
+  text-align: center;
   background-color: var(--cor-bg-header);
   color: var(--cor-texto);
   font-size: 1.1rem;
@@ -146,12 +147,12 @@ tbody tr:hover {
 /* =========================
    LINKS
 ========================= */
-a {
+table a {
   text-decoration: none;
   color: var(--cor-link);
   transition: color 0.3s;
 }
 
-a:hover {
+table a:hover {
   color: var(--cor-hover);
 }

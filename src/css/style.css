@@ -4,6 +4,23 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* garante que ocupe toda a altura da tela */
+}
+
+
+main {
+  flex: 1; /* faz o conteúdo central "empurrar" o footer pra baixo */
+}
+
 header {
   display: grid;
   grid-template-columns: 1fr auto 1fr; /* 3 colunas: esquerda - centro - direita */
@@ -38,7 +55,7 @@ header > ul li a {
 }
 
 header > ul li a:hover {
-  color: #0084ff;
+  color: #00bcd4;
 }
 
 /* Ícone de perfil alinhado à direita */
