@@ -39,6 +39,7 @@ main {
     gap: 25px;
     max-width: 1100px;
     margin: auto;
+    justify-items: center; 
 }
 
 
@@ -76,4 +77,86 @@ main {
     text-align: justify;
     color: #666;
     line-height: 1.8;
+}
+
+/* === MAIN / CELULAR === */
+@media (max-width: 768px) {
+    main {
+        padding: 20px 50px; /* menos espaçamento lateral */
+    }
+    
+    .sobre-objetivo {
+        margin-top: 30px;
+    }
+
+    /* Sobre objetivo */
+    .sobre-objetivo h1 {
+        font-size: 2rem; /* reduz o título */
+        margin-bottom: 10px;
+    }
+
+    .sobre-objetivo p {
+        font-size: 1rem; /* reduz o texto */
+        line-height: 1.5;
+    }
+
+    /* Título da equipe */
+    .integrantes h2 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    /* Grid dos cards */
+    .grid-integrantes {
+        grid-template-columns: 1fr; /* uma coluna */
+        gap: 20px; /* menos espaçamento entre cards */
+    }
+
+    /* Cards */
+    .card-integrante {
+        padding: 15px;
+    }
+
+    .card-integrante img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 10px;
+    }
+
+    .card-integrante h3 {
+        font-size: 1.1rem;
+    }
+
+    .card-integrante p {
+        font-size: 0.9rem;
+        padding: 0 10px;
+    }
+
+    .integrantes {
+        margin-bottom: 50px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    main {
+        padding: 20px 60px;
+    }
+
+    .grid-integrantes {
+        grid-template-columns: repeat(2, 1fr); /* uma coluna */
+        gap: 20px; /* menos espaçamento entre cards */
+    }
+
+    .sobre-objetivo {
+        margin-top: 50px;
+    }
+
+    .grid-integrantes > .card-integrante:last-child {
+        grid-column: 1 / -1; /* ocupa toda a linha e fica centralizado */
+        justify-self: center; /* centraliza o card */
+    }
+
+    .integrantes {
+        margin-bottom: 50px;
+    }
 }
