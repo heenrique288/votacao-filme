@@ -63,5 +63,3 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </form>
     <a href="register.php">Criar conta</a>
 </div>
-
-<?php include("../global/footer.php"); ?>
