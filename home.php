@@ -246,5 +246,21 @@ if ($resWinner && $resWinner->num_rows > 0) {
 </section>
 
 <script src="src/js/perfil.js"></script>
+<script>
+setInterval(() => {
+    fetch('status.php')
+        .then(r => r.json())
+        .then(data => {
+            if (data.roleta_ativa == 1 && data.ids) {
+                // desativa a roleta para não dar loop infinito
+                fetch('status.php?reset=1');
+
+                // redireciona
+                window.location.href = "roleta.php?ids=" + encodeURIComponent(data.ids);
+            }
+        })
+        .catch(err => console.error("Erro ao consultar status:", err));
+}, 5000);
+</script>
 
 <?php include("global/footer.php"); ?>

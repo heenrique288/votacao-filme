@@ -11,19 +11,6 @@ if (!$usuarioId) {
     exit;
 }
 
-// checar admin
-$stmt = $conn->prepare("SELECT admin FROM login WHERE id = ?");
-$stmt->bind_param("i", $usuarioId);
-$stmt->execute();
-$res = $stmt->get_result();
-$row = $res->fetch_assoc();
-if (intval($row['admin']) !== 1) {
-    $_SESSION['mensagem'] = "Acesso negado: apenas admin.";
-    $_SESSION['tipo'] = "error";
-    header("Location: home.php");
-    exit;
-}
-
 // ids vindos por GET (ex: 5,7)
 $idsParam = $_GET['ids'] ?? '';
 $idsClean = preg_replace('/[^0-9,]/', '', $idsParam);
@@ -61,25 +48,30 @@ if (count($candidates) < 2) {
     </div>
 
     <div class="text-center mb-4">
-        <button id="spinBtn" class="btn btn-primary btn-lg">Girar roleta</button>
+        <?php
+            // Verifica se usuário é admin
+            $isAdmin = (isset($_SESSION['admin']) && $_SESSION['admin'] == 1);
+        ?>
+        <button id="spinBtn" class="btn btn-primary btn-lg" <?php if (!$isAdmin) echo 'disabled'; ?>>Girar roleta</button>
     </div>
 
     <div class="text-center">
-        <a href="home.php" class="btn btn-secondary">Cancelar</a>
+        <a href="home.php" class="btn btn-secondary <?php if (!$isAdmin) echo 'disabled'; ?>">Cancelar</a>
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 const candidates = <?= json_encode($candidates, JSON_HEX_TAG) ?>;
-
-// elementos
 const nomeFilme = document.getElementById('nomeFilme');
 const cartaz = document.getElementById('cartaz');
 const spinBtn = document.getElementById('spinBtn');
 
 let running = false;
+let resultadoFinal = null;
+let mostrouResultado = false;
 
-// função pra mostrar candidato
+// mostra candidato
 function showCandidate(idx) {
     const c = candidates[idx];
     nomeFilme.textContent = c.titulo;
@@ -90,103 +82,142 @@ function showCandidate(idx) {
     }
 }
 
-// animação simples: muda candidato rapidamente e desacelera
-function spin() {
+// animação com desaceleração
+function spinV2(fixedIndex = null, isAdmin = false) {
     if (running) return;
     running = true;
     spinBtn.disabled = true;
 
-    const totalCycles = 40 + Math.floor(Math.random()*30); // variação
-    let i = 0;
-    let idx = 0;
-    let interval = 60;
-
-    const timer = setInterval(() => {
-        showCandidate(idx % candidates.length);
-        idx++;
-        i++;
-        // desacelera progressivamente
-        if (i > totalCycles * 0.6) interval += 6;
-        if (i > totalCycles * 0.8) interval += 10;
-        if (i >= totalCycles) {
-            clearInterval(timer);
-            running = false;
-            spinBtn.disabled = false;
-            // escolha final
-            const chosenIndex = (idx - 1) % candidates.length;
-            const chosen = candidates[chosenIndex];
-            // pedir confirmação antes de enviar
-            if (confirm('Confirmar vencedor: ' + chosen.titulo + ' ?')) {
-                // enviar POST para finalizar_votacao.php
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.action = 'finalizar_votacao.php';
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'choice';
-                input.value = chosen.id;
-                form.appendChild(input);
-                document.body.appendChild(form);
-                form.submit();
-            }
-        }
-    }, interval);
-
-    // para incrementar o intervalo dinâmicamente (não suportado diretamente no setInterval),
-    // em navegadores restantes o code acima ajusta 'interval' mas setInterval mantém o antigo.
-    // Implementação simples para efeito: usar setTimeout recursivo em vez de setInterval:
-}
-
-// alternativa com setTimeout recursivo para desaceleração correta
-function spinV2() {
-    if (running) return;
-    running = true;
-    spinBtn.disabled = true;
-
-    const totalSteps = 60 + Math.floor(Math.random()*40);
-    let step = 0;
-    let idx = 0;
+    const totalSteps = 60 + Math.floor(Math.random() * 40);
+    let step = 0, idx = 0;
 
     function stepFn() {
-        showCandidate(idx % candidates.length);
+        const displayIdx = (fixedIndex !== null && step >= totalSteps) ? fixedIndex : idx % candidates.length;
+        showCandidate(displayIdx);
         idx++;
         step++;
-        // tempo cresce com o passo -> desacelera
-        let delay = 30 + Math.floor( Math.pow(step / totalSteps, 2) * 400 );
+
+        let delay = 30 + Math.floor(Math.pow(step / totalSteps, 2) * 400);
+
         if (step < totalSteps) {
             setTimeout(stepFn, delay);
         } else {
             running = false;
             spinBtn.disabled = false;
-            const chosenIndex = (idx - 1) % candidates.length;
-            const chosen = candidates[chosenIndex];
-            setTimeout(() => {
-                if (confirm('Confirmar vencedor: ' + chosen.titulo + ' ?')) {
-                    const form = document.createElement('form');
-                    form.method = 'POST';
-                    form.action = 'finalizar_votacao.php';
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = 'choice';
-                    input.value = chosen.id;
-                    form.appendChild(input);
-                    document.body.appendChild(form);
-                    form.submit();
+
+            if (fixedIndex === null && isAdmin) {
+                // admin confirma escolha
+                const chosen = candidates[(idx - 1) % candidates.length];
+                setTimeout(() => {
+                    if (confirm('Confirmar vencedor: ' + chosen.titulo + ' ?')) {
+                        const form = document.createElement('form');
+                        form.method = 'POST';
+                        form.action = 'finalizar_votacao.php';
+                        const input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = 'choice';
+                        input.value = chosen.id;
+                        form.appendChild(input);
+                        document.body.appendChild(form);
+                        form.submit();
+                    }
+                }, 100); // pequeno delay para garantir execução
+            } else if (fixedIndex !== null && !mostrouResultado) {
+                spinBtn.disabled = true;
+                mostrouResultado = true;
+                const chosen = candidates[fixedIndex];
+
+                nomeFilme.textContent = "🎬 " + chosen.titulo;
+                if (chosen.poster_path) {
+                    cartaz.innerHTML = `<img src="https://image.tmdb.org/t/p/w342${chosen.poster_path}" class="img-fluid rounded shadow">`;
+                } else {
+                    cartaz.innerHTML = `<div class="bg-secondary text-white p-5">Sem imagem</div>`;
                 }
-            }, 800);
+
+                // Se for admin, pergunta se quer confirmar o vencedor
+                if (isAdmin) {
+                    setTimeout(() => {
+                        if (confirm('Confirmar vencedor: ' + chosen.titulo + ' ?')) {
+                            const form = document.createElement('form');
+                            form.method = 'POST';
+                            form.action = 'finalizar_votacao.php';
+                            const input = document.createElement('input');
+                            input.type = 'hidden';
+                            input.name = 'choice';
+                            input.value = chosen.id;
+                            form.appendChild(input);
+                            document.body.appendChild(form);
+                            form.submit();
+                        }
+                        else {
+                            spinBtn.disabled = false;
+                        }
+                    }, 500); // pequeno delay para não interromper a animação
+                }
+            }
         }
     }
 
     stepFn();
 }
 
-spinBtn.addEventListener('click', () => {
-    // usar spinV2 para animação mais suave
-    spinV2();
-});
-
 // mostra primeiro candidato
 showCandidate(0);
+
+// admin: inicia roleta no clique
+spinBtn.addEventListener('click', async () => {
+    if (!<?= $isAdmin ? 'true' : 'false' ?>) return;
+    mostrouResultado = false;
+
+    // pega IDs dos candidatos (os empatados)
+    const ids = candidates.map(c => c.id).join(',');
+
+    try {
+        // chama o backend para escolher o vencedor e salvar no banco
+        const res = await fetch(`sortear_vencedor.php?ids=${ids}`);
+        const data = await res.json();
+
+        if (data.error) {
+            alert("Erro: " + data.error);
+            return;
+        }
+
+        // obtém o índice do vencedor no array local
+        const winnerIndex = candidates.findIndex(c => c.id == data.id);
+
+        if (winnerIndex === -1) {
+            alert("Filme vencedor não encontrado entre os candidatos locais!");
+            return;
+        }
+
+        // inicia a animação sincronizada
+        spinV2(winnerIndex, true);
+
+    } catch (e) {
+        console.error(e);
+        alert("Erro ao sortear o vencedor.");
+    }
+});
+
+// polling para todos
+setInterval(() => {
+    $.get("status_roleta.php", function(res){
+        if(res.resultado){
+            resultadoFinal = candidates.findIndex(c => c.id == res.resultado);
+        }
+
+        if(res.girando == 1 && !running && resultadoFinal === null){
+            // apenas usuários executam a animação temporária
+            if (!<?= $isAdmin ? 'true' : 'false' ?>) {
+                spinV2(null, false);
+            }
+        }
+
+        if(resultadoFinal !== null && !running && !mostrouResultado){
+            spinV2(resultadoFinal, false);
+        }
+    }, "json");
+}, 2000);
 </script>
 
 <?php include("global/footer.php"); ?>

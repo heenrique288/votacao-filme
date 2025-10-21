@@ -52,6 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['choice']) && intval($
     $ins->bind_param("iss", $choice, $ind['titulo'], $ind['poster_path']);
     $ins->execute();
 
+    $conn->query("DELETE FROM status_votacao");
+
     $_SESSION['mensagem'] = "Votação finalizada. Filme vencedor: " . $ind['titulo'];
     $_SESSION['tipo'] = "success";
     header("Location: home.php");
@@ -96,13 +98,27 @@ if (count($winners) === 1) {
     $ins->bind_param("iss", $winnerId, $ind['titulo'], $ind['poster_path']);
     $ins->execute();
 
+    // limpar status da roleta, já que temos vencedor
+    $conn->query("DELETE FROM status_votacao");
+
+
     $_SESSION['mensagem'] = "Votação finalizada. Filme vencedor: " . $ind['titulo'];
     $_SESSION['tipo'] = "success";
     header("Location: home.php");
     exit;
 } else {
-    // empate -> redireciona para a página da roleta (ids separados por vírgula)
+    // empate -> registrar roleta no banco para todos os usuários
     $ids = implode(",", $winners);
+
+    // limpar status anterior (se houver)
+    $conn->query("DELETE FROM status_votacao");
+
+    // registrar a nova roleta
+    $stmt = $conn->prepare("INSERT INTO status_votacao (roleta_ativa, ids) VALUES (1, ?)");
+    $stmt->bind_param("s", $ids);
+    $stmt->execute();
+
+    // admin vai direto para a roleta
     header("Location: roleta.php?ids=" . urlencode($ids));
     exit;
 }
