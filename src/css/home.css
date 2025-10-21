@@ -207,3 +207,35 @@
     text-align: left;          /* nomes começam alinhados à esquerda */
 }
 
+@media (max-width: 768px) {
+    .home-page .container {
+        padding: 20px 50px; /* mantém padding em cima/baixo e adiciona espaço lateral */
+    }
+    
+    .home-page h1 {
+        font-size: 1.6rem; /* menor que 3rem, mas ainda chamativo */
+    }
+
+    .home-page p {
+        font-size: 1rem; /* reduz também o texto abaixo */
+    }
+
+    .indicacoes .container {
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+
+    .indicacoes .titulo-secundario {
+        font-size: 1.5em;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .home-page .container {
+        padding: 20px 70px; /* mantém padding em cima/baixo e adiciona espaço lateral */
+    }
+
+    .home-page p {
+        font-size: 1.4rem; /* reduz também o texto abaixo */
+    }
+}

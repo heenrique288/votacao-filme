@@ -31,8 +31,8 @@ if ($usuario_id) {
 <body>
 <header>
     <!-- Botão do menu (hambúrguer) -->
-    <div class="menu-toggle" onclick="toggleMenu()">
-        &#9776; <!-- Ícone de 3 linhas -->
+    <div class="menu-toggle">
+        <i class="fas fa-bars"></i> <!-- Ícone de 3 linhas -->
     </div>
 
     <div class="logo">

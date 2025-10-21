@@ -3,23 +3,21 @@
 // ÍCONE DE HAMBURGUER NO CELULAR
 //
 ////////////////////////////////////
-// Abre e fecha o menu no celular
+const menuToggle = document.querySelector('.menu-toggle');
+const menu = document.querySelector('header > ul');
+
+// cria overlay dinamicamente
+const overlay = document.createElement('div');
+overlay.classList.add('overlay');
+document.body.appendChild(overlay);
+
 function toggleMenu() {
-    const menu = document.getElementById('menu');
-    menu.classList.toggle('menu-ativo');
+  menu.classList.toggle('menu-ativo');
+  overlay.classList.toggle('ativo');
 }
 
-// Abre e fecha o dropdown do perfil
-function toggleDropdown() {
-    const dropdown = document.getElementById('dropdownMenu');
-    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-}
+// abre/fecha ao clicar no hambúrguer
+menuToggle.addEventListener('click', toggleMenu);
 
-// Fecha dropdown se clicar fora
-document.addEventListener('click', function(e) {
-    const dropdown = document.getElementById('dropdownMenu');
-    const perfil = document.querySelector('.perfil');
-    if (!perfil.contains(e.target)) {
-        dropdown.style.display = 'none';
-    }
-});
+// fecha ao clicar fora
+overlay.addEventListener('click', toggleMenu);

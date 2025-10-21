@@ -5,7 +5,9 @@
 }
 
 html, body {
+  overflow-x: hidden;
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
@@ -28,6 +30,7 @@ header {
   background-color: #333;
   color: #fff;
   padding: 20px 100px;
+  position: relative;
 }
 
 /* Logo alinhada à esquerda */
@@ -152,6 +155,22 @@ header > ul li a:hover {
   margin-bottom: 5px;
 }
 
+/* Overlay escuro */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 150;
+  }
+
+  .overlay.ativo {
+    display: block;
+  }
+
 /* === RESPONSIVIDADE === */
 @media (max-width: 768px) {
   header {
@@ -160,33 +179,60 @@ header > ul li a:hover {
     position: relative;
   }
 
+  header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70px; /* largura da faixa – ajuste como quiser */
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.05); /* cor suave translúcida */
+    border-right: 1px solid rgba(255, 255, 255, 0.15); /* borda sutil */
+    pointer-events: none; /* evita interferir em cliques */
+  }
+
   .logo {
+    justify-self: center;
     text-align: center;
   }
 
   /* Esconde o menu por padrão */
   header > ul {
-    display: none;
-    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: -250px; /* começa fora da tela */
+    width: 250px;
+    height: 100%;
     background-color: #333;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    padding: 15px 0;
-    text-align: center;
-    z-index: 99;
+    flex-direction: column;
+    justify-content: start;
+    padding: 60px 20px;
+    gap: 20px;
+    transition: left 0.3s ease;
+    z-index: 200;
+  }
+
+  header > ul li {
+    padding: 15px 20px; /* 🔹 aumenta o espaço entre os itens */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* 🔹 linha separadora sutil */
+  }
+
+  header > ul li:last-child {
+    border-bottom: none; /* 🔹 remove a linha do último item */
   }
 
   /* Mostra o menu quando estiver ativo */
   header > ul.menu-ativo {
-    display: flex;
+    left: 0;
   }
 
   /* Mostra o botão hambúrguer */
   .menu-toggle {
     display: block;
-    
+    font-size: 28px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 2; /* fica acima do ::before */
   }
 
   /* Ajusta o ícone de perfil */
@@ -203,6 +249,73 @@ header > ul li a:hover {
   .dropdown {
     top: 50px;
     right: 10px;
+  }
+}
+
+/* === TABLETS (entre 769px e 1024px) === */
+@media (min-width: 769px) and (max-width: 1024px) {
+  header {
+    grid-template-columns: auto 1fr auto; /* mantém menu à esquerda, logo no centro, perfil à direita */
+    padding: 15px 40px; /* mais espaço lateral */
+  }
+
+  header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    pointer-events: none;
+  }
+
+  .logo {
+    justify-self: center;
+    text-align: center;
+  }
+
+  /* Mantém o menu lateral igual ao celular */
+  header > ul {
+    position: fixed;
+    top: 0;
+    left: -280px; /* ligeiramente mais largo */
+    width: 280px;
+    height: 100%;
+    background-color: #333;
+    flex-direction: column;
+    justify-content: start;
+    padding: 70px 25px;
+    gap: 25px;
+    transition: left 0.3s ease;
+    z-index: 200;
+  }
+
+  header > ul li {
+    padding: 18px 20px;
+    font-size: 1.1rem; /* aumenta leve no tablet */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  header > ul.menu-ativo {
+    left: 0;
+  }
+
+  .menu-toggle {
+    display: block;
+    font-size: 30px; /* um pouco maior */
+    margin-right: 15px;
+  }
+
+  .perfil .user-photo {
+    width: 45px;
+    height: 45px;
+  }
+
+  /* Overlay escuro */
+  .overlay {
+    background: rgba(0, 0, 0, 0.6); /* levemente mais escuro */
   }
 }
 
