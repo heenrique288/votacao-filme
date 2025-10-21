@@ -33,7 +33,7 @@ if ($query) {
             <div class="row">
                 <?php if (!empty($results['results'])): ?>
                     <?php foreach ($results['results'] as $filme): ?>
-                        <div class="col-md-3 mb-4">
+                        <div class="col-6 col-md-3 mb-4">
                             <div class="card h-100 shadow-sm">
                                 <?php if ($filme['poster_path']): ?>
                                     <a href="abrirfilme.php?id=<?= $filme['id'] ?>">
