@@ -160,6 +160,12 @@ if ($resWinner && $resWinner->num_rows > 0) {
                             <form method="POST" action="votar.php">
                                 <input type="hidden" name="indicacao_id" value="<?= $idIndicacao ?>">
                                 <button type="submit" class="btn btn-outline-primary btn-sm">Votar</button>
+                                <?php if ($isAdmin): ?>
+                                    <button type="submit" formaction="remover_indicacao.php" class="btn btn-outline-danger btn-sm ms-2"
+                                            onclick="return confirm('Tem certeza que deseja remover esta indicação?');">
+                                        Remover
+                                    </button>
+                                <?php endif; ?>
                             </form>
                             <div class="progress mt-2" style="height: 20px;">
                                 <div class="progress-bar" role="progressbar"

@@ -22,7 +22,7 @@ require "login/auth.php";
                 <h3>Henrique José</h3>
                 <p>Sou desenvolver e CEO do projeto <strong>TO ZUANDO</strong>. Adoro conversar com meus amigos sobre jogos e filmes. Criei esse projeto por puro hobby, mas também com o intuito de crescer profissionalmente na área de <strong>desenvolvimento de sistemas</strong>.</p>
                 <p><i class="fa-brands fa-instagram"></i> heenrique288</p>
-                <p><i class="bi bi-github"></i>henrique288</p>
+                <p><i class="bi bi-github"></i>heenrique288</p>
             </div>
 
             <div class="card-integrante">
