@@ -142,3 +142,67 @@ header > ul li a:hover {
   cursor: pointer;
 }
 
+/* === BOTÃO HAMBURGUER === */
+.menu-toggle {
+  display: none; /* aparece só no celular */
+  font-size: 28px;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+  header {
+    grid-template-columns: auto 1fr auto; /* menu - logo - perfil */
+    padding: 10px 20px;
+    position: relative;
+  }
+
+  .logo {
+    text-align: center;
+  }
+
+  /* Esconde o menu por padrão */
+  header > ul {
+    display: none;
+    flex-direction: column;
+    background-color: #333;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+    z-index: 99;
+  }
+
+  /* Mostra o menu quando estiver ativo */
+  header > ul.menu-ativo {
+    display: flex;
+  }
+
+  /* Mostra o botão hambúrguer */
+  .menu-toggle {
+    display: block;
+    
+  }
+
+  /* Ajusta o ícone de perfil */
+  .perfil {
+    margin-right: 0;
+  }
+
+  .perfil .user-photo {
+    width: 35px;
+    height: 35px;
+  }
+
+  /* Ajuste do dropdown */
+  .dropdown {
+    top: 50px;
+    right: 10px;
+  }
+}
+

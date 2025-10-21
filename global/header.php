@@ -26,13 +26,19 @@ if ($usuario_id) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="/votacao-filme/src/js/index.js" defer></script>
+    <script src="/votacao-filme/src/js/celular.js" defer></script>
 </head>
 <body>
 <header>
+    <!-- Botão do menu (hambúrguer) -->
+    <div class="menu-toggle" onclick="toggleMenu()">
+        &#9776; <!-- Ícone de 3 linhas -->
+    </div>
+
     <div class="logo">
         <h2>To zuando</h2>
     </div>
-    <ul>
+    <ul id="menu">
         <li><a href="/votacao-filme/home.php">Home</a></li>
         <li><a href="/votacao-filme/sobre.php">Sobre</a></li>
         <li><a href="/votacao-filme/index.php">Indique seu filme!</a></li>
