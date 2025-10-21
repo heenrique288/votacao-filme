@@ -245,10 +245,12 @@ header > ul li a:hover {
     height: 35px;
   }
 
-  /* Ajuste do dropdown */
   .dropdown {
-    top: 50px;
-    right: 10px;
+    top: 20px;
+    right: auto;       /* remove alinhamento à direita */
+    left: 50%;         /* começa no meio do viewport do menu */
+    transform: translateX(-80%); /* centraliza */
+    min-width: 150px;  /* mantém largura mínima */
   }
 }
 
@@ -316,6 +318,14 @@ header > ul li a:hover {
   /* Overlay escuro */
   .overlay {
     background: rgba(0, 0, 0, 0.6); /* levemente mais escuro */
+  }
+
+  .dropdown {
+    top: 20px;
+    right: auto;
+    left: 50%;
+    transform: translateX(-80%);
+    min-width: 160px; /* um pouco maior que no celular */
   }
 }
 
