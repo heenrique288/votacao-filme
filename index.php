@@ -58,7 +58,6 @@ if ($query) {
                 <?php endif; ?>
             </div>
         <?php else: ?>
-            <p>Conteúdo do site aqui...</p>
         <?php endif; ?>
     </div>
 </main>

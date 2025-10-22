@@ -36,7 +36,9 @@ if ($usuario_id) {
     </div>
 
     <div class="logo">
-        <h2>To zuando</h2>
+        <a href="/votacao-filme/home.php">
+            <h2>To zuando</h2>
+        </a>
     </div>
     <ul id="menu">
         <li><a href="/votacao-filme/home.php">Home</a></li>

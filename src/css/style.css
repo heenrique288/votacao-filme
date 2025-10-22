@@ -38,6 +38,11 @@ header {
   justify-self: start;
 }
 
+.logo > a {
+  text-decoration: none;
+  color: #fff;
+}
+
 /* Menu centralizado */
 header > ul {
   list-style: none;
@@ -156,20 +161,24 @@ header > ul li a:hover {
 }
 
 /* Overlay escuro */
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    z-index: 150;
-  }
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 150;
+}
 
-  .overlay.ativo {
-    display: block;
-  }
+.overlay.ativo {
+  display: block;
+}
+
+.mt-5 {
+  height: 100vh;
+}
 
 /* === RESPONSIVIDADE === */
 @media (max-width: 768px) {
