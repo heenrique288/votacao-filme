@@ -156,3 +156,127 @@ table a {
 table a:hover {
   color: var(--cor-hover);
 }
+
+.medalha {
+  font-size: 40px;
+}
+
+/* =========================
+   ESTILIZAÇÃO PARA CELULAR AJUSTADA
+========================= */
+@media (max-width: 768px) {
+
+  /* CENTRALIZAÇÃO */
+  .centralizar {
+      padding: 15px 5px; /* ainda menos padding */
+  }
+
+  /* TÍTULO PRINCIPAL */
+  .titulo-principal {
+      font-size: 1.8rem; /* menor ainda */
+      text-align: center;
+      word-wrap: break-word;
+  }
+
+  /* TABELA */
+  table {
+      width: 95%; /* ocupa quase toda a tela */
+      max-width: 100%; /* garante que não ultrapasse */
+      font-size: 0.75rem; /* fonte menor */
+      margin: 10px auto;
+      border-radius: 8px;
+      box-sizing: border-box; /* padding dentro da largura */
+      overflow-x: auto; /* caso ainda tenha algo, permite scroll */
+  }
+
+  th, td {
+      padding: 8px 6px; /* padding reduzido */
+      word-break: break-word; /* evita overflow de texto longo */
+  }
+
+  thead {
+      font-size: 0.85rem;
+  }
+
+  thead th {
+      padding: 12px 6px;      /* aumenta um pouco o espaço vertical */
+      line-height: 1.2;       /* melhora o espaçamento das letras */
+      word-break: normal;     /* evita quebra estranha das palavras */
+      white-space: nowrap;    /* impede quebrar cabeçalho em múltiplas linhas */
+  }
+
+  /* AVATAR / FOTO */
+  .foto {
+      width: 30px;
+      height: 30px;
+      border-width: 1px;
+  }
+
+  /* HOVER MENOS FORTE PARA CELULAR */
+  tbody tr:hover {
+      transform: none;
+  }
+
+  /* LINKS */
+  table a {
+      font-size: 0.75rem;
+  }
+
+  /* CENTRALIZAR TABELA NO CELULAR */
+  .centralizar table {
+      margin: 0 auto;
+  }
+
+  /* BACKGROUND */
+  .centralizar::before {
+      background: rgba(0,0,0,0.75);
+  }
+
+  .medalha {
+      font-size: 25px; /* tamanho menor */
+  }
+
+  .meu-popup-personalizado {
+      width: 95% !important;   /* ocupa quase toda a tela */
+      padding: 15px !important; 
+      font-size: 0.9rem !important;
+  }
+
+  .meu-popup-personalizado .swal2-html-container > div {
+      flex-direction: column;      /* empilha imagem e texto */
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+  }
+
+  .meu-popup-personalizado .swal2-html-container img {
+      width: 100%;                 /* imagem ocupa largura total do container */
+      max-width: 250px;            /* mas não exagera */
+      height: auto;
+      margin: 0 auto;
+  }
+
+  .meu-popup-personalizado .swal2-html-container strong {
+      font-size: 18px;             /* título menor */
+  }
+
+  .meu-popup-personalizado .swal2-html-container p {
+      font-size: 14px;             /* texto menor */
+      margin: 10px 0 5px 0;
+      line-height: 1.4;
+  }
+
+  .meu-popup-personalizado .swal2-title {
+      font-size: 1.2rem !important; 
+      margin-bottom: 20px !important;
+  }
+
+  .swal2-close {
+      font-size: 1.2rem !important; /* botão fechar maior */
+  }
+
+  .swal2-confirm {
+      font-size: 0.9rem !important; /* botão confirmar menor */
+  }
+}

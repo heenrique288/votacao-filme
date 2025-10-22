@@ -22,20 +22,13 @@ $nomes = [
 ];
 
 ?>
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Onde os Fracos não tem Vez</title>
-    <link rel="stylesheet" href="../src/css/tabela.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../src/js/tabela.js"></script>
-</head>
-
 <?php include("../global/header.php"); ?>
+<head>
+    <link rel="stylesheet" href="../src/css/tabela.css">
+    <script src="../src/js/tabela.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
 <main>
     <div class="centralizar">
         <section class="search-section py-5 bg-tabela">
@@ -84,11 +77,11 @@ $nomes = [
                         <td>
                             <?php
                                 if ($usuario['posicao_dinamica'] == 1) {
-                                    echo '<i class="fa-solid fa-medal" style="color: rgb(255, 232, 103); font-size: 40px;"></i>';
+                                    echo '<i class="fa-solid fa-medal medalha" style="color: rgb(255, 232, 103);"></i>';
                                 } elseif ($usuario['posicao_dinamica'] == 2) {
-                                    echo '<i class="fa-solid fa-medal" style="color: silver; font-size: 40px;"></i>';
+                                    echo '<i class="fa-solid fa-medal medalha" style="color: silver;"></i>';
                                 } elseif ($usuario['posicao_dinamica'] == 3) {
-                                    echo '<i class="fa-solid fa-medal" style="color: #cd7f32; font-size: 40px;"></i>';
+                                    echo '<i class="fa-solid fa-medal medalha" style="color: #cd7f32;"></i>';
                                 } else {
                                     echo $usuario['posicao_dinamica'] . '°';
                                 }
