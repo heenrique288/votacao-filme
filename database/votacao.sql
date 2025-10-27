@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 21/10/2025 às 07:55
+-- Tempo de geração: 27/10/2025 às 07:09
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -78,7 +78,8 @@ INSERT INTO `filmes` (`id`, `usuario_id`, `titulo`, `sinopse`, `banner`, `ano`) 
 (37, 4, 'Ne zha', NULL, NULL, 2019),
 (38, 2, 'Silent Hill', NULL, NULL, NULL),
 (39, 5, '500 dias com ela', NULL, NULL, NULL),
-(40, 2, 'O Grande Lebowski', NULL, NULL, NULL);
+(40, 2, 'O Grande Lebowski', NULL, NULL, NULL),
+(41, 4, 'hot fuzz', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -111,17 +112,6 @@ CREATE TABLE `indicacoes` (
   `data_indicacao` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Despejando dados para a tabela `indicacoes`
---
-
-INSERT INTO `indicacoes` (`id`, `usuario_id`, `filme_id`, `titulo`, `poster_path`, `backdrop_path`, `overview`, `data_indicacao`) VALUES
-(6, 3, 299534, 'Vingadores: Ultimato', '/7jvlqGsxeMKscskuUZgKk0Kuv99.jpg', '/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg', 'Após os eventos devastadores de \"Vingadores: Guerra Infinita\", o universo está em ruínas devido aos esforços do Titã Louco, Thanos. Com a ajuda de aliados remanescentes, os Vingadores devem se reunir mais uma vez a fim de desfazer as ações de Thanos e restaurar a ordem no universo de uma vez por todas, não importando as consequências.', '2025-09-23 07:30:34'),
-(7, 7, 1038392, 'Invocação do Mal 4: O Último Ritual', '/40nHGUfypLhlr7gJx8At1IbYkaK.jpg', '/fq8gLtrz1ByW3KQ2IM3RMZEIjsQ.jpg', 'Neste último capítulo, os Warren enfrentam mais um caso aterrorizante, desta vez envolvendo entidades misteriosas que desafiam sua experiência. Ed (Patrick Wilson) e Lorraine (Vera Farmiga) se veem obrigados a encarar seus maiores medos, colocando suas vidas em risco em uma batalha final contra forças malignas.', '2025-09-25 04:00:34'),
-(8, 8, 814, 'Um Lobisomem Americano em Londres', '/gKvCDhPcykUyUILZqf78eN0skE8.jpg', '/4js6VLf6qHWUbW42BpXiQKPBP7t.jpg', 'Os americanos David e Jack viajam de mochila às costas pela Grã-Bretanha quando são atacados por um lobo. David sobrevive com uma mordida, mas Jack não resiste. Enquanto se recupera no hospital, David é atormentado por pesadelos com seu amigo mutilado, que o avisa que ele está virando um lobisomem.', '2025-09-25 04:22:17'),
-(9, 9, 615453, 'Ne Zha', '/zb8xejiaNR0snSJgDepwFQUIi2e.jpg', '/k1pJslKr4aDayw9kWwWnlC3MIP3.jpg', '\"Ne Zha\" conta a história de um jovem prodígio, nascido como um demônio e destinado a trazer destruição, que luta contra o seu destino para se tornar um herói.  Ele nasce da união de uma pérola celestial e um coração de um demônio, amaldiçoado a trazer destruição ao mundo.  Por causa da sua origem demoníaca, Ne Zha é odiado e temido por todos, sendo forçado a lutar contra os seus próprios demônios interiores para provar o seu valor e mudar o seu destino. O filme acompanha a sua jornada enquanto ele tenta quebrar os grilhões do seu destino, escolhendo o bem em vez do mal para se tornar o herói que ele quer ser.', '2025-09-25 04:23:05'),
-(14, 1, 671, 'Harry Potter e a Pedra Filosofal', '/4rtsbE9aQ1qw4gv7yYwaNYfWFoS.jpg', '/bfh9Z3Ghz4FOJAfLOAhmc3ccnHU.jpg', 'Harry Potter é um garoto órfão que vive infeliz com seus tios, os Dursley. Em seu aniversário de 11 anos ele recebe uma carta que mudará sua vida: um convite para ingressar em Hogwarts.', '2025-10-21 03:37:21');
-
 -- --------------------------------------------------------
 
 --
@@ -145,12 +135,14 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`id`, `nome`, `sobrenome`, `email`, `senha`, `criado_em`, `foto`, `admin`) VALUES
 (1, 'Henrique', 'José', 'henrique@gmail.com', '$2y$10$wSDqZE0Sc3TBuEJ4ZYPBl.U4wg24a3E.hrj7riRTBphI9rZXd4LFy', '2025-09-22 20:33:50', 'user_1.jpeg', 1),
-(3, 'Fernando', 'José', 'f@gmail.com', '$2y$10$pxd.OPoxTO8s6hWxGMP8GumJ5bELLfjJAPwLUxnQQNroyznB0IdYi', '2025-09-23 07:05:02', 'user_3.png', 0),
-(7, 'isa', 'beli', 'isa@gmail.com', '$2y$10$1ceP.f/nJjdqG2hSBkYgSeSctaY/nW0QfF3KiHx6Ypk4UlLEC0aJa', '2025-09-25 03:59:57', 'user_7.png', 0),
-(8, 'joao', 'victor', 'j@gmail.com', '$2y$10$a8yHsHEDRjPPj96B6NGwZuSBCERZUwjX6h1JUUQrICoFNiC.dpxmq', '2025-09-25 04:21:31', 'user_8.png', 0),
-(9, 'theo', 'tavernard', 'theo@gmail.com', '$2y$10$FNBMBMR6KuY4lcozEx.vtOySV7afUdpkA0TJObzZTkNgx1QUsxvam', '2025-09-25 04:22:47', 'user_9.png', 0),
+(3, 'Guilherme', 'Barros', 'palacio@gmail.com', '$2y$10$pxd.OPoxTO8s6hWxGMP8GumJ5bELLfjJAPwLUxnQQNroyznB0IdYi', '2025-09-23 07:05:02', 'user_3.png', 0),
+(7, 'Geovana', 'Dutra', 'geo@gmail.com', '$2y$10$1ceP.f/nJjdqG2hSBkYgSeSctaY/nW0QfF3KiHx6Ypk4UlLEC0aJa', '2025-09-25 03:59:57', 'user_7.png', 0),
+(8, 'João', 'Victor', 'joao@gmail.com', '$2y$10$a8yHsHEDRjPPj96B6NGwZuSBCERZUwjX6h1JUUQrICoFNiC.dpxmq', '2025-09-25 04:21:31', 'user_8.png', 0),
+(9, 'Theo', 'Tavernard', 'theo@gmail.com', '$2y$10$FNBMBMR6KuY4lcozEx.vtOySV7afUdpkA0TJObzZTkNgx1QUsxvam', '2025-09-25 04:22:47', 'user_9.png', 0),
 (10, 'Edu', 'Pereira', 'edu@gmail.com', '$2y$10$hXP7jK7EomCZdtGc0dQ/W.BdwHohfA1Ix0b2wLwUDzCkmvNRu5ScG', '2025-09-25 04:25:10', 'user_10.png', 0),
-(11, 'alan', 'guilherme', 'alan@gmail.com', '$2y$10$.FXX.oToNoh1rkcfeQPPy.hgPOTo6NzPYnpZK.pm0r5KVrIIG82Qy', '2025-09-25 05:48:17', 'user_11.png', 0);
+(11, 'Alan', 'Guilherme', 'alan@gmail.com', '$2y$10$.FXX.oToNoh1rkcfeQPPy.hgPOTo6NzPYnpZK.pm0r5KVrIIG82Qy', '2025-09-25 05:48:17', 'user_11.png', 0),
+(20, 'Carlos', 'Henrique', 'carlos@gmail.com', '$2y$10$uLn4JWe3eUdgFRlONfldzepb/PZ/NA.aP0rMY5U3MJnxwBtSQlgvO', '2025-10-27 06:03:27', 'user_20.png', 0),
+(21, 'Gabriel', 'Izawa', 'gabriel@gmail.com', '$2y$10$OkoacDUVDp7/vE0YT9M3r.BL2Eha1JL0svdxI1vYyRhLePsi5/I2y', '2025-10-27 06:04:22', 'user_21.png', 0);
 
 -- --------------------------------------------------------
 
@@ -210,7 +202,7 @@ INSERT INTO `usuarios` (`id`, `foto`, `nome`, `posicao`, `votos`) VALUES
 (1, '../src/img/FotoEdu.png', 'Eduardo Pereira', 1, 8),
 (2, '../src/img/FotoTheo.png', 'Théo Tavernard', 2, 8),
 (3, '../src/img/FotoHenrique.jpeg', 'Henrique José', 3, 5),
-(4, '../src/img/FotoJoao.png', 'João Victor', 4, 5),
+(4, '../src/img/FotoJoao.png', 'João Victor', 4, 6),
 (5, '../src/img/FotoLuka.png', 'Alan Guilherme', 4, 5),
 (6, '../src/img/FotoCarlos.png', 'Carlos Henrique', 4, 4),
 (7, '../src/img/FotoPalacio.png', 'Guilherme Barros', 5, 2),
@@ -229,16 +221,6 @@ CREATE TABLE `votos` (
   `indicacao_id` int(11) NOT NULL,
   `data_voto` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `votos`
---
-
-INSERT INTO `votos` (`id`, `usuario_id`, `indicacao_id`, `data_voto`) VALUES
-(2, 1, 7, '2025-09-24 04:15:56'),
-(8, 7, 6, '2025-09-25 04:00:13'),
-(9, 8, 7, '2025-09-25 04:22:22'),
-(10, 9, 6, '2025-09-25 04:23:26');
 
 --
 -- Índices para tabelas despejadas
@@ -305,7 +287,7 @@ ALTER TABLE `votos`
 -- AUTO_INCREMENT de tabela `filmes`
 --
 ALTER TABLE `filmes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de tabela `filme_semana`
@@ -323,7 +305,7 @@ ALTER TABLE `indicacoes`
 -- AUTO_INCREMENT de tabela `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de tabela `status_roleta`
