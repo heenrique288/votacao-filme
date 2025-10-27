@@ -56,7 +56,7 @@ require "login/auth.php";
             <div class="card-integrante">
                 <img src="src/img/FotoCarlos.png" alt="Foto do integrante 6">
                 <h3>Carlos Henrique</h3>
-                <p>Sou Carlos, um dos membros mais antigos do onde os fracos, sou fã de franquias de filmes clássicos como star wars, jurrasic park, senhor dos anéis e etc.Gosto de jogos em geral e tenho um breve conhecimento, e também sou viciado em teclado e guitarra além de participar de uma banda. Sou taxado de "criminoso" pelos outros membros (que não é tão verdade).</p>
+                <p>Sou Carlos, um dos membros mais antigos do onde os fracos, sou fã de franquias de filmes clássicos como star wars, jurrasic park, senhor dos anéis e etc. Gosto de jogos em geral e tenho um breve conhecimento de cinema, e também sou viciado em teclado e guitarra além de participar de uma banda. Sou taxado de "criminoso" pelos outros membros (que não é tão verdade).</p>
                 <p><i class="fa-brands fa-instagram"></i> carlos_silva167</p>
             </div>
 
